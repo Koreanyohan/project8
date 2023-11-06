@@ -29,4 +29,4 @@ public class Ex3 {
 //public static void moveAnimal(Eagle eagle) {
 //	eagle.move();
 //}
-}
+//}

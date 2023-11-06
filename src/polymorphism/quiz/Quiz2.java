@@ -1,34 +1,54 @@
-package polymorphism;
+package polymorphism.quiz;
+//이거 보지 말고 답안보기. 가격부분에서 나는 return값안해놔서 오류뜸.
+import java.util.ArrayList;
 
-
-
-/*
- * 쇼핑몰 회원관리 프로그램에 다형성 적용
- * */
-public class Ex2 {
+public class Quiz2 {
 
 	public static void main(String[] args) {
-		Customer3 customer1 = new Customer3 ("둘리");
-		customer1.calcPrice(10000);
-		customer1.showCustomerInfo();
+		ArrayList<Customer4> customerList = new ArrayList<Customer4>();
 		
-		Customer3 customer2 = new VIPCustomer3 ("또치");
-		customer2.calcPrice(10000);
-		customer2.showCustomerInfo();
-		//!! 다형성 -> 하나의 클래스로 참조변수 이용해서 다양한 인스턴스 처리
+		Customer4 customer1 = new Customer4 ("둘리");
+		Customer4 customer2 = new VIPCustomer4 ("또치");
+		Customer4 customer3 = new GOLDCustomer4 ("길동");
+		
+		customerList.add (customer1);
+		customerList.add (customer2);
+		customerList.add (customer3);
+		
+		
+//		customerList.add(new Customer4("둘리"));
+//		customerList.add(new GoldCustomer4("또치"));
+//		customerList.add(new VIPCustomer4("도우너"));
+		 // 람다식 for문
+		for (Customer4 customer : customerList) {
+			customer.calcPrice(10000); 
 		}
+		 //일반 for문
+		for (int i = 0 ; i< customerList.size() ; i++){
+			Customer4 customer = customerList.get(i);
+			customer.calcPrice(10000);
+		}
+		
+	
+		for (Customer4 customer : customerList) {
+			customer.showCustomerInfo() ;
+		}
+	}
 
 }
 
 
+
+
+
 //일반회원 클래스 
-class Customer3 {
+class Customer4 {
 	String customerName; // 회원 이름
 	String customerGrade; // 회원 등급
 	double bonusPoint; // 보너스포인트
 	double bonusRatio; // 적립률
 
-	public Customer3 (String name) {
+	public Customer4 (String name) {
 		customerName = name;
 		customerGrade = "SILVER";
 		bonusRatio = 0.01;
@@ -47,10 +67,10 @@ class Customer3 {
 
 }
 //Vip 회원 클래스
-class VIPCustomer3 extends Customer3 { // 상속받기
+class VIPCustomer4 extends Customer4 { // 상속받기
 	double saleRatio; // 할인률
 
-	public VIPCustomer3 (String customerName) {
+	public VIPCustomer4 (String customerName) {
 		super(customerName); // 부모 클래스의 생성자 호출  
 		customerGrade = "VIP";
 		bonusRatio = 0.05;
@@ -78,10 +98,10 @@ class VIPCustomer3 extends Customer3 { // 상속받기
 }
 
 
-class GOLDCustomer3 extends Customer3 { // 상속받기
+class GOLDCustomer4 extends Customer4 { // 상속받기
 	double saleRatio; // 할인률
 
-	public GOLDCustomer3 (String customerName) {
+	public GOLDCustomer4 (String customerName) {
 		super(customerName); // 부모 클래스의 생성자 호출  
 		customerGrade = "GOLD";
 		bonusRatio = 0.02;
